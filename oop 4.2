@@ -1,0 +1,130 @@
+#include <iostream>
+using namespace std;
+
+
+class CricketTeam            
+{
+    private:
+    char name[40], region[20];
+    int batavg, bowlavg;
+    
+    public:
+    void readData();
+    void generateList();
+    void sortList();
+    void displayList();
+};
+const int size=5;    //array size
+int arr;
+CricketTeam players[size];   //array for inputting details of 5 players
+CricketTeam temp;
+
+void CricketTeam::readData()   //member function for reading the data of players
+{
+    for(int i=0; i<size; i++)
+    {
+        cout<<"Enter the name of the player: "<<endl;
+        cin>>players[i].name;
+        cout<<"Enter the region of the player: "<<endl;
+        cin>>players[i].region;
+        cout<<"Enter the batting average of the player: "<<endl;
+        cin>>players[i].batavg;
+        cout<<"Enter the bowling average of the player: "<<endl;
+        cin>>players[i].bowlavg;
+        cout<<"*****************************************************************"<<endl;
+        
+    }
+}
+
+void CricketTeam::displayList()       //member function for displaying the data of players
+{
+    for(int i=0; i<size; i++)
+    {
+        cout<<"Player name: "<<players[i].name<<endl;
+        cout<<"Player region: "<<players[i].region<<endl;
+        cout<<"Batting average: "<<players[i].batavg<<endl;
+        cout<<"Bowling average: "<<players[i].bowlavg<<endl;
+        cout<<"****************************"<<endl;
+    }
+}
+
+void CricketTeam::generateList()     //member function for generating a list of players whose batting avg is greater than 30 and Bowling avg is less than 25
+{
+    cout<<"*******PLAYERS WITH BATTING AVERAGE MORE THAN 30 and BOWLING AVERAGE IS LESS THAN 25**********"<<endl;
+    for(int i=0; i<size; i++)
+    {
+        if(players[i].batavg>30 && players[i].bowlavg<25)      //if statement for batting avg greater than 30 and bowling avg less than 25
+        {
+            cout<<"Player name: "<<players[i].name<<endl;
+            cout<<"Player region: "<<players[i].region<<endl;
+            cout<<"Batting average: "<<players[i].batavg<<endl;
+            cout<<"Bowling average: "<<players[i].bowlavg<<endl;
+            cout<<"****************************"<<endl;
+            
+        }
+        
+    }
+}
+
+void CricketTeam::sortList()//member function for sorting batting averages in descending order and bowling averages in ascending order
+{
+    int i, j;
+    
+    cout<<"****PLAYERS WITH BATTING AVERAGE MORE THAN 30 IN DESCENDING ORDER******"<<endl;
+    for(i=0;i<size;i++)
+	{		
+		for(j=i+1;j<size;j++)
+		{
+		    
+			if(players[i].batavg<players[j].batavg)     //sorting the batting averages in descending order
+			{
+				temp=players[i];
+				players[i]=players[j];
+				players[j]=temp;
+			}
+		}
+	}
+    //for displaying the sorted batting averages
+	for(int i=0;i<size;i++)
+	{
+	    cout<<"Player name: "<<players[i].name<<endl;
+	    cout<<"Player region: "<<players[i].region<<endl;
+     	cout<<"Batting average: "<<players[i].batavg<<endl;
+	    cout<<"*****************************************************************"<<endl;
+	}
+	
+	cout<<"****PLAYERS WITH BOWLING AVERAGE LESS THAN 25 IN DESCENDING ORDER******"<<endl;
+    for(i=0;i<size;i++)
+	{		
+		for(j=i+1;j<size;j++)
+		{
+		    
+			if(players[i].bowlavg>players[j].bowlavg)      //sorting the bowling averages in descending order
+			{
+				temp=players[i];                           
+				players[i]=players[j];
+				players[j]=temp;
+			}
+		}
+	}
+    //for displaying the sorted bowling averages
+	for(int i=0;i<size;i++)
+	{
+	    cout<<"Player name: "<<players[i].name<<endl;
+	    cout<<"Player region: "<<players[i].region<<endl;
+     	cout<<"Bowling average: "<<players[i].bowlavg<<endl;
+	    cout<<"*****************************************************************"<<endl;
+	}
+}
+
+int main()
+{
+
+    CricketTeam o;   //creating an object 'o' for class CricketTeam
+    
+    o.readData();
+    o.displayList();
+    o.generateList();
+    o.sortList();
+    return 0;
+}
