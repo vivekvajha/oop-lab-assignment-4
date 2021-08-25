@@ -1,0 +1,87 @@
+#include <iostream>
+using namespace std;
+
+class EleBill
+{
+    private:
+    char name[50],month[10]; 
+    long int connumber,CUnit,PUnit,amt,unit,type;
+    
+    public:
+    void readData();
+    void calculateBill();
+    void printBill();
+};
+
+void EleBill::readData()              //member function for reading the data
+{
+    cout<<"Enter your details"<<endl;
+    
+    cout<<"Enter your name: "<<endl;
+    cin>>name;
+    
+    cout<<"Enter customer number: "<<endl;
+    cin>>connumber;
+    
+    cout<<"Enter your bill month: "<<endl;
+    cin>>month;
+    
+    cout<<"Enter your previous reading: "<<endl;
+    cin>>PUnit;
+    
+    cout<<"Enter your current reading: "<<endl;
+    cin>>CUnit;
+    
+    cout<<"Press '1' if commercial and press '2' if non-commercial "<<endl;
+    cin>>type;
+}
+
+void EleBill::calculateBill()       //member funtion for calculating the bill using the given conditions
+{
+    unit=CUnit-PUnit;               //units is equal to the subtraction of previous unit reading from current unit reading
+    
+//if consumer type is commercial and the no. of units is less than or equal to 200 then Rs 5 is charged per unit
+    if(type==1 && unit<=200)        
+    {
+        amt=unit*5;  
+    }
+    
+//if consumer type is commercial and the no. of units is greater than 200 then Rs 10 is charged per unit
+    if(type==1 && unit>201)
+    {
+        amt=unit*10; 
+    }
+    
+//if consumer type is non commercial and the no. of units is less than or equal to 100 then Rs 3 is charged per unit
+    if(type==2 && unit<=100)
+    {
+        amt=unit*3; 
+    }
+    
+//if consumer type is non commercial and the no. of units is greater than 200 then Rs 5 is charged per unit
+    if(type==2 && unit>101)
+    {
+        amt=unit*5; 
+    }
+}
+
+void EleBill::printBill()    //member function for displaying the details of the consumer along with final bill amount
+{
+    cout<<"Your Name: "<<name<<endl;
+    cout<<"Your Customer Number: "<<connumber<<endl;
+    cout<<"Bill month: "<<month<<endl;
+    cout<<"Previous unit reading: "<<PUnit<<endl;
+    cout<<"Current unit reading: "<<CUnit<<endl;
+    cout<<"Your total bill amount is: "<<amt<<endl;
+}
+
+int main()
+{
+    EleBill o;    //creating an object 'o' for class EleBill
+    
+    o.readData();
+    o.calculateBill();
+    o.printBill();
+    return 0;
+}
+
